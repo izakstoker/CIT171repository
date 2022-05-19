@@ -1,12 +1,12 @@
 //© 2021 Sean Murdock
 let userName= "";
-let password = "";
+let otp = "";
 let phonenumber = "";
 let verifypassword = "";
 let passwordRegEx=/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!]).{6,40})/;
 
 function setphonenumber(){
-    phonenumber =$("phonenumber").val();
+    phonenumber =$("#phonenumber").val();
 }
 
 
@@ -17,12 +17,9 @@ function setusername(){
 }
 
 function setuserpassword(){
-    password = $("#password").val();
-    var valid=passwordRegEx.exec(password);
-    if (!valid){
-        alert('Must be 6 digits, upper, lower, number, and symbol');
-    }
-}
+    password = $("#otp").val();}
+    
+
 
 function setverifypassword(){
     verifypassword = $("#verifypassword").val();
@@ -58,7 +55,7 @@ function sendtext(){
 
     $.ajax ({
         type: 'POST',
-        url: 'https://dev.setdi.me/twofactorlogin/'+phonenumber,
+        url: 'https://dev.setdi.me/twofactorlogin'+phonenumber,
         contentType: 'application/text',
         dataType: 'text'
     })
@@ -73,7 +70,7 @@ function userlogin(){
     $.ajax({
         type: 'POST',
         url: 'https://dev.stedi.me/login',
-        data: JSON.stringify({userName, password}),
+        data: JSON.stringify({phoneNumber, onetTimePassword:otp}),
         success: function(data) {
             window.location.href = "/timer.html#"+data;//add the token to the url
         },
